@@ -87,15 +87,13 @@ The credentials stored in data memory illustrate the required input mapping base
 | :--- | :--- | :--- | :--- |
 | `panteater` | `PETER` | `peter` | Full lower-to-upper translation |
 | `qv` | `HELLOTHERE!` | `hellothere!` | Alphabetic inversion; symbol `!` preserved |
-| `EECS20` | `HAPPY`[cite: 2] / `hAPPy`[cite: 1] | `HappY`[cite: 2] / `hAAPy`[cite: 2] | Mixed-case inversion |
+| `EECS20` | `HAPPY` / `hAPPy` | `HappY` / `hAAPy` | Mixed-case inversion |
 
 ---
 
 ## Execution & Simulation
 
 1. **Load Environment**: Open an LC-3 simulator (such as the LC-3 Tools GUI or command-line simulator).
-2. **Assemble**: Load `hello-buddy-login.asm`[cite: 1] to generate the symbol table and binary object file (`.obj`).
+2. **Assemble**: Load `hello-buddy-login.asm` to generate the symbol table and binary object file (`.obj`).
 3. **Execute**: Set the Program Counter (`PC`) to `x3000` and initiate execution (`Run`).
-4. **Interact**: Provide inputs via the console display as prompted[cite: 2]. End string entry using `Enter` (detected via line feed check `xFFF6`).
-
-```
+4. **Interact**: Provide inputs via the console display as prompted. End string entry using `Enter` (detected via line feed check `xFFF6`).
