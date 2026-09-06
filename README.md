@@ -11,43 +11,44 @@ The authentication engine operates as an interactive console state machine that 
 
 ```
 
-```
-            +-------------------------+
-            |   User Enters Name      |
-            +-------------------------+
-                         |
-               [Length Check <= 16]
-                         v
-           +---------------------------+
-           | Lookup in Credentials DB  |
-           +---------------------------+
-               /                   \
-        [Found]                   [Not Found]
-           |                           |
-           v                           v
- +-------------------+       [Increment Attempt Count]
- | Prompt Password   |                 |
- +-------------------+       [Count == 3?] ---> [Halt Program]
-           |                           | (< 3)
- [In-Place Cipher]                     v
- (Case-Inversion)            [Clear Input Buffer]
-           |                           |
-           v                           +---> [Reprompt Name]
- +-------------------+
- | Validate Against  |
- | Stored Ciphertext |
- +-------------------+
-    /             \
-[Match]        [Mismatch]
-   |               |
-   v               +---> [Attempt Count >= 3?] ---> [Halt Program]
 
-```
-
-[Concatenate & Print]
-"Hello, "
-|
-[Halt]
+ +-------------------------+
+                |   User Enters Name      |
+                +-------------------------+
+                             |
+                   [Length Check <= 16]
+                             v
+               +---------------------------+
+               | Lookup in Credentials DB  |
+               +---------------------------+
+                   /                   \
+            [Found]                   [Not Found]
+               |                           |
+               v                           v
+     +-------------------+       [Increment Attempt Count]
+     | Prompt Password   |                 |
+     +-------------------+       [Count == 3?] ---> [Halt Program]
+               |                           | (< 3)
+     [In-Place Cipher]                     v
+     (Case-Inversion)            [Clear Input Buffer]
+               |                           |
+               v                           +---> [Reprompt Name]
+     +-------------------+
+     | Validate Against  |
+     | Stored Ciphertext |
+     +-------------------+
+        /             \
+    [Match]        [Mismatch]
+       |               |
+       |               +---> [Attempt Count >= 3?] ---> [Halt Program]
+       |                                   | (< 3)
+       v                                   v
++---------------------+          [Clear Input Buffer]
+| Concatenate & Print |                    |
+|   "Hello, <User>"   |                    +---> [Reprompt Password]
++---------------------+
+       |
+    [Halt]
 
 ```
 
